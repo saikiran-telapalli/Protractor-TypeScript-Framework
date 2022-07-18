@@ -1,0 +1,105 @@
+Protractor : https://www.protractortest.org/#/
+
+1. Download & Install node js
+2. Set the system variable path
+3. Check node -v, npm -v
+4. Install Protractor nam install -g protractor
+This will install two command line tools, protractor and webdriver-manager. Try running protractor --version to make sure it's working.
+You can find path:	Urs/Sai/ApData/Roaming/
+5.  webdriver-manager update
+6.  Now start up a server with webdriver-manager start
+
+This will start up a Selenium Server and will output a bunch of info logs. Your Protractor test will send requests to this server to control a local browser. You can see information about the status of the server at http://localhost:4444/wd/hub.
+
+7. Type script Framework
+    1. Visual studio
+    2. Create a folder in local and open form VS code
+    3. Create a package.json from terminal npm init
+    4. Observe nodes_modules folder created
+    5. Add protractor dependencies from terminal nam install protractor
+    6. Add type script dependencies from —> https://github.com/angular/protractor/blob/5.4.1/exampleTypescript/package.json
+    7. And run npm install from terminal then above dependencies will be added to nodes_modules
+    8. Create configuration.ts https://github.com/angular/protractor/blob/5.4.1/exampleTypescript/conf.ts
+    9. Create spec.ts having describe and it, also make sure to import 
+        1. Reference for above two steps for modification as like https://www.protractortest.org/#/api-overview
+    10. Intall Typescript global nam install -g typescript
+    11. Protractor can run only .js file, to convert ts to js 
+        1. we need to run tsc —init, It creates tsconfig.json exclude non req files/modify the file
+        2. Run tsc from terminal
+        3. Observe the output dir folder create with the name given in tsconfig.json
+        4. Now the run the command protractor dirName/configuration.js
+        5. It will start execution
+    12. Create pageObject class 
+        1. Class should have constructor, with proper name:ElementFinder
+        2. Import required element, by, etc.,
+        3. Export should be at prefix of that class
+    13. Create an object of that class using let rename
+    14. Modify the elements with rename and call those properties
+    15. To overcome “protractor dirName/configuration.js” from terminal every time
+        1. Go to package.json and add the same in test under scripts key
+        2. Then run npm run test
+        3. We cal also add pretest key in the same scripts which will include “ttsc” command to compile, this runs before test
+        4. See execution starts
+    16. Let is used instead of var in typescript for sync purpose which can also be restricted to type as below
+            1. let a:string=“hello”
+            2. let b:number=4;
+            3. let c:any=“say”; (any accepts any type of value)
+            4. let flag:boolean=false;
+    17. Const will make the variable strict means we cannot change the value assigned to that variable
+
+Firstly, when downloading the ProtractorTypeScriptCucumber.zip from the course, make sure to delete the node_modules folder and re-install it using "npm install" in the same location.
+After that, open the package.json file and make sure the below line of code is present in it:
+"webdriver-update": "./node_modules/protractor/bin/webdriver-manager update"
+Now, run "npm run webdriver-update" command. Finally, run "npm run test" command. It should work fine.
+
+Solution: ./node_modules/protractor/bin/webdriver-manager update --versions.chrome 2.35 in terminal
+
+SolutionInCase: ”webdriver-manager": "~12.1.8" in package.json
+
+rs-MAC15:ProtractorTypeScriptCucumber -Part1To2 saikiran$ npm run test
+
+> protractortypescriptcucumber@1.0.0 pretest /Users/saikiran/Desktop/ProtractorFW_Phase1/ProtractorTypeScriptCucumber -Part1To2
+> tsc
+
+
+> protractortypescriptcucumber@1.0.0 test /Users/saikiran/Desktop/ProtractorFW_Phase1/ProtractorTypeScriptCucumber -Part1To2
+> protractor JSFiles/configuration.js
+
+[12:23:22] I/launcher - Running 1 instances of WebDriver
+[12:23:22] I/direct - Using ChromeDriver directly...
+[12:23:22] E/direct - Error code: 135
+[12:23:22] E/direct - Error message: Could not find chromedriver at C:
+
+
+18. Export should be defined for a class in order to use the methods defined in it creating an object in other file
+19. Also import that class with path in the file used the object
+20.  Functions can be defined with return type and called at last in the same file like below
+        1. function validate(value:number):number{ value+1; }
+        2. And we call as —> validate(2);
+        
+        
+      -----------------------------------------------------------------------------------------------
+      Simple steps:
+      npm init creates package.json
+      npm --init creates tsconfig.json
+      run this cmd if chrome browser not invoked node ./node_modules/protractor/bin/webdriver-manager update
+      
+      
+******************Is it possible to navigate from feature file to step definition in VSCode**************************
+
+1. Press Ctrl + , to open User Settings
+
+2. Scroll down to Cucumber Auto Complete update this in steps edit settings.json
+
+  {
+    "cucumberautocomplete.steps": [
+    
+
+        "stepDefinations/*.ts"
+    ],
+    "cucumberautocomplete.syncfeatures": "features/*.feature"
+}
+
+Reload VSCode
+
+Open a .feature file and right click any step, you should have Go To Definition and Peek Definition working.
